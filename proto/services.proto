@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+//import "google/protobuf/empty.proto";
+
+option go_package = "go.unix7.org/pmapp/services;services";
+
+option java_multiple_files = true;
+option java_package = "org.unix7.services";
+option java_outer_classname = "ServicesProto";
+
+package services;
+
+service Hello {
+  rpc Hello (HelloRequest) returns (HelloReply) {}
+}
+message HelloRequest {
+
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}
+
+service System {
+  rpc Reboot(EmptyRequest) returns (EmptyReply) {};
+  rpc Monitor(stream EmptyRequest) returns (stream Measure) {};
+}
+
+message Measure {
+    uint64 power = 1;
+}
+
+message EmptyRequest {
+}
+
+message EmptyReply {
+}
